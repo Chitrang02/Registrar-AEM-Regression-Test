@@ -1,0 +1,42 @@
+﻿# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Cypress
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
+results/
+cypress/downloads/
+
+# Test Reports
+mochawesome-report/
+cypress/reports/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build
+dist/
+build/
+
+# Temporary
+temp/
+tmp/
+
