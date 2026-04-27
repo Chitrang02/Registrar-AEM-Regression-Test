@@ -1,7 +1,7 @@
 export class LoginPageObject {
 
     gotoLoginPage() {
-        cy.visit(Cypress.env('url')+ "/aem");
+        cy.visit(Cypress.env('url'));
     }
 
     login(username, password) {

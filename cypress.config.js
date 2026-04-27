@@ -19,7 +19,7 @@ module.exports = defineConfig({
 
   env: {
 
-    url: "https://dev.myfda.com"
+    url: "https://dev-hub.registrarcorp.com/aem"
   },
 
 });
