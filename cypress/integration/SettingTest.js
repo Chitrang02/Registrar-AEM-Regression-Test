@@ -17,59 +17,69 @@ describe('Setting Tab Tests', function () {
 
     it('Verify Settings Tab is Accessible', function () {
 
+        settingPage.clickOnSettingTab()
         settingPage.clickOnSettingTab().should('include', '/settings');
 
     });
 
     it('Verify Company Name is Mandatory', function () {
 
+        settingPage.clickOnSettingTab()
         settingPage.companyNameMandatory().should('have.text', 'Please enter Company Name');;
 
     });
 
     it('Verify Company Name can be edited and saved', function () {
 
+        settingPage.clickOnSettingTab()
         settingPage.companyNameEditAndSave().should('have.text', uniqueCompanyName);
 
     });
 
     it('Verify Email Address Section is Mandatory', function () {
 
+        settingPage.clickOnSettingTab()
         settingPage.companyEmailMandatory().should('have.text', 'Please enter Email');
 
     });
 
     it('Verify Email Address can be edited and saved', function () {
 
+        settingPage.clickOnSettingTab()
         settingPage.companyEmailEditAndSave().should('have.value', uniqueEmail);
 
     });
 
     it('Verify New Email Address field can be added and add second email address', function () {
 
+        settingPage.clickOnSettingTab()
         settingPage.companyEmailAddAndSave().eq(1).should('have.value', uniqueEmail);
 
     });
 
     it('Verify Added Email Address can be removed', function () {
 
+        settingPage.clickOnSettingTab()
         settingPage.removeAddedEmail().its('length').should('eq', 1);
 
     });
 
     it('Verify Brand Name can be Edit and saved', function () {
 
+        settingPage.clickOnSettingTab()
         settingPage.brandNameEditAndSave().first().should('have.value', uniqueBrandName);
 
     });
 
     it('Verify Brand New Brand Name Can be added and Saved', function () {
 
+        settingPage.clickOnSettingTab()
         settingPage.brandNameAddAndSave().last().should('have.value', uniqueBrandName);
     })
 
     it('Verify User can remove the Brand Name', function () {
 
+        settingPage.clickOnSettingTab()
         settingPage.removeAddedBrandName().last().should('have.value', uniqueBrandName);
     })
 
