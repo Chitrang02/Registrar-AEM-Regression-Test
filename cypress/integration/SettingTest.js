@@ -17,7 +17,6 @@ describe('Setting Tab Tests', function () {
 
     it('Verify Settings Tab is Accessible', function () {
 
-        settingPage.clickOnSettingTab()
         settingPage.clickOnSettingTab().should('include', '/settings');
 
     });
@@ -25,77 +24,96 @@ describe('Setting Tab Tests', function () {
     it('Verify Company Name is Mandatory', function () {
 
         settingPage.clickOnSettingTab()
-        settingPage.companyNameMandatory().should('have.text', 'Please enter Company Name');;
+        settingPage.companyNameMandatory().should('equal', 'Please enter Company Name');;
 
     });
 
     it('Verify Company Name can be edited and saved', function () {
 
         settingPage.clickOnSettingTab()
-        settingPage.companyNameEditAndSave().should('have.text', uniqueCompanyName);
-
+        settingPage.companyNameEditAndSave().then((data) => {
+            cy.log('We typed:', data.typed);
+            cy.log('We found:', data.found);
+            expect(data.found).to.equal(data.typed);
+        });
     });
 
     it('Verify Email Address Section is Mandatory', function () {
 
         settingPage.clickOnSettingTab()
-        settingPage.companyEmailMandatory().should('have.text', 'Please enter Email');
+        settingPage.companyEmailMandatory().should('equal', 'Please enter Email');
 
     });
 
     it('Verify Email Address can be edited and saved', function () {
 
         settingPage.clickOnSettingTab()
-        settingPage.companyEmailEditAndSave().should('have.value', uniqueEmail);
+        settingPage.companyEmailEditAndSave().then((data) => {
+            cy.log('We typed:', data.typed);
+            cy.log('We found:', data.found);
+            expect(data.found).to.equal(data.typed);
+        });
+
 
     });
 
     it('Verify New Email Address field can be added and add second email address', function () {
 
         settingPage.clickOnSettingTab()
-        settingPage.companyEmailAddAndSave().eq(1).should('have.value', uniqueEmail);
+        settingPage.companyEmailAddAndSave().then((data) => {
+            cy.log('We typed:', data.typed);
+            cy.log('We found:', data.found);
+            expect(data.found).to.equal(data.typed);
+        })
 
     });
 
     it('Verify Added Email Address can be removed', function () {
 
         settingPage.clickOnSettingTab()
-        settingPage.removeAddedEmail().its('length').should('eq', 1);
+        settingPage.removeAddedEmail().should('eq', 1);
 
     });
 
     it('Verify Brand Name can be Edit and saved', function () {
 
         settingPage.clickOnSettingTab()
-        settingPage.brandNameEditAndSave().first().should('have.value', uniqueBrandName);
-
+        settingPage.brandNameEditAndSave().then((data) => {
+            cy.log('We typed:', data.typed);
+            cy.log('We found:', data.found);
+            expect(data.found).to.equal(data.typed);
+        });
     });
 
     it('Verify Brand New Brand Name Can be added and Saved', function () {
 
         settingPage.clickOnSettingTab()
-        settingPage.brandNameAddAndSave().last().should('have.value', uniqueBrandName);
+        settingPage.brandNameAddAndSave().then((data) => {
+            cy.log('We typed:', data.typed);
+            cy.log('We found:', data.found);
+            expect(data.found).to.equal(data.typed);
+        });
     })
 
     it('Verify User can remove the Brand Name', function () {
 
         settingPage.clickOnSettingTab()
-        settingPage.removeAddedBrandName().last().should('have.value', uniqueBrandName);
-    })
-
-    it.only('Verify that user can upload the website logo successfully', function () {
-        settingPage.clickOnSettingTab()
-        cy.intercept('POST', '**/aers-setting*').as('uploadLogo');
- const filePath = 'images/logo.jpg';
-
-        cy.origin('https://aem-dev.registrarcorp.com',{args: { filePath }}, ({filePath}) => {
-           
-            cy.get('#WebLogo').selectFile(filePath, { force: true });
-            cy.get('button.save-btn[aria-label="savebtn"]').click();
-            cy.wait('@uploadLogo').its('response.statusCode').should('eq', 200);
-            cy.get('div.Toastify').should('be.visible').and('contain', 'successfully');
-
+        settingPage.removeAddedBrandName().then((count) => {
+            expect(count.after).to.equal(count.before - 1);
         });
     })
 
+    it('Verify that user can upload the website logo successfully', function () {
+
+        settingPage.clickOnSettingTab()
+        settingPage.upload_Website_Logo().should('contain', 'You have updated profile details successfully.');
+     
+    })
+
+     it('Verify that user can upload the AEM Portal logo successfully', function () {
+
+        settingPage.clickOnSettingTab()
+        settingPage.upload_AEMProtal_Logo().should('contain', 'You have updated profile details successfully.');
+     
+    })
 });
