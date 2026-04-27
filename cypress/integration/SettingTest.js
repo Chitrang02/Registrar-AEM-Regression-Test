@@ -107,13 +107,20 @@ describe('Setting Tab Tests', function () {
 
         settingPage.clickOnSettingTab()
         settingPage.upload_Website_Logo().should('contain', 'You have updated profile details successfully.');
-     
+
     })
 
-     it('Verify that user can upload the AEM Portal logo successfully', function () {
+    it('Verify that user can upload the AEM Portal logo successfully', function () {
 
         settingPage.clickOnSettingTab()
         settingPage.upload_AEMProtal_Logo().should('contain', 'You have updated profile details successfully.');
-     
+
     })
+
+    it('Verify that user can upload Product Listing file successfully', function () {
+
+        settingPage.clickOnSettingTab()
+        settingPage.upload_ProductListing_File().should('', '');
+    })
+
 });

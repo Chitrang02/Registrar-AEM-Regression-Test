@@ -260,4 +260,8 @@ export class SettingPageObject {
 
         });
     }
+
+    upload_Product_listing_file(){
+        
+    }
 };
